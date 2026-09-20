@@ -2,11 +2,173 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  padding: 0;
-  margin: 0;
+:root {
+  --canvas: #f4f1ec;
+  --surface: #ffffff;
+  --text: #14161a;
+  --text-muted: #5c6672;
+  --action: #b45f2b;
+  --action-deep: #96491e;
+  --accent: #e2a33c;
+  --border: #ded8cf;
+  --nav-height: 4.5rem;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored headings clear of the fixed navbar. */
+  scroll-padding-top: calc(var(--nav-height) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--text);
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Guards against any single wide child causing sideways scroll. */
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* Visible, consistent focus for every interactive element. */
+:focus-visible {
+  outline: 3px solid var(--action);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #14161a;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion vocabulary
+   Three reveal treatments only, so the whole site moves the same way:
+   rise (blocks), wipe (rules and dividers), and lift (list rows).
+   --------------------------------------------------------------------------- */
+
+/*
+ * Reveals are opt in via the `js` class that layout.tsx sets before paint.
+ * Without JavaScript the class is never added, so every rule below is inert
+ * and all content renders visible. Content must never depend on script.
+ */
+html.js .reveal {
+  opacity: 0;
+  transition:
+    opacity 520ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+html.js .reveal[data-motion="rise"] {
+  transform: translate3d(0, 18px, 0);
+}
+
+html.js .reveal[data-motion="lift"] {
+  transform: translate3d(0, 10px, 0);
+}
+
+html.js .reveal[data-motion="wipe"] {
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 1;
+  transition: transform 640ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+html.js .reveal[data-motion="wipe"].is-visible {
+  transform: scaleX(1);
+}
+
+/* The one signature moment: the hero conductor lines drawing in. */
+.conductor {
+  stroke-dasharray: var(--dash, 620);
+  stroke-dashoffset: var(--dash, 620);
+  animation: draw 1500ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.node-pulse {
+  animation: node 3200ms ease-in-out infinite;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes node {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Must match or beat the `html.js` specificity above, or reduced motion
+     visitors would be left looking at permanently hidden content. */
+  html.js .reveal,
+  html.js .reveal[data-motion="rise"],
+  html.js .reveal[data-motion="lift"],
+  html.js .reveal[data-motion="wipe"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .conductor {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .node-pulse {
+    animation: none;
+    opacity: 0.8;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
