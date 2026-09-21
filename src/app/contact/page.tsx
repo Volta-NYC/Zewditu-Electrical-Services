@@ -22,7 +22,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader
-        index="04"
+        index="4"
         eyebrow="Contact"
         title="Tell us what needs power."
         lede="Send the details and we will come back with a clear scope and a real number. For anything urgent, calling is faster than typing."

@@ -42,7 +42,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        index="02"
+        index="2"
         eyebrow="About"
         title="A small shop in Amsterdam, wired for bigger work."
         lede="Zewditu Electrical Services was formed in 2021 and works out of Amsterdam, New York. We are certified as a minority and woman owned business, which lets us take on public work alongside the residential jobs that keep the lights on."
@@ -147,7 +147,7 @@ export default function AboutPage() {
                 <div className="border-b border-paper-line py-7">
                   <dt className="flex items-baseline gap-4">
                     <span className="font-mono text-[0.72rem] tabular-nums text-copper">
-                      {String(i + 1).padStart(2, "0")}
+                      {i + 1}
                     </span>
                     <span className="font-display text-[1.3rem] font-bold tracking-tight">
                       {v.title}

@@ -22,7 +22,7 @@ export default function CredentialsPage() {
   return (
     <>
       <PageHeader
-        index="03"
+        index="3"
         eyebrow="Credentials"
         title="Everything you need to put us in a bid package."
         lede="Certifications, registration numbers, and firm details in one place, so an estimator does not have to email us for them at 4:00 PM on a deadline."
@@ -106,7 +106,7 @@ export default function CredentialsPage() {
                       {c.abbr}
                     </span>
                     <span className="font-mono text-[0.68rem] tabular-nums text-slate-muted">
-                      {String(i + 1).padStart(2, "0")}
+                      {i + 1}
                     </span>
                   </div>
                   <h3 className="mt-3 font-display text-[1.2rem] font-bold leading-snug tracking-tight">

@@ -51,7 +51,7 @@ function ServiceEntry({ service, index }: { service: Service; index: number }) {
         <div className="flex items-center gap-4 sm:col-span-3 sm:block">
           <ServiceIcon name={service.icon} className="text-copper" />
           <span className="mt-3 block font-mono text-[0.7rem] uppercase tracking-label text-slate-muted">
-            {String(index + 1).padStart(2, "0")}
+            {index + 1}
           </span>
         </div>
         <div className="sm:col-span-9">
@@ -74,7 +74,7 @@ export default function ServicesPage() {
   return (
     <>
       <PageHeader
-        index="01"
+        index="1"
         eyebrow="Services"
         title="What we wire, repair, and bring up to code."
         lede="Two sides of one shop. Residential work across the Mohawk Valley, and certified subcontract work for builders, property managers, and housing authorities."

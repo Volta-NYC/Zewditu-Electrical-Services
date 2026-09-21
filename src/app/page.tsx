@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Schematic } from "@/lib/components/schematic"
 import Reveal from "@/lib/components/reveal"
 import { ServiceIcon } from "@/lib/components/service-icon"
@@ -20,7 +21,15 @@ export default function HomePage() {
           than centred.
           ------------------------------------------------------------------- */}
       <section className="relative isolate overflow-hidden bg-ink text-paper">
-        <Schematic className="absolute inset-0 h-full w-full opacity-70" />
+        <Image
+          src="/images/industrial-electrical-work.webp"
+          alt="An open electrical panel with labeled circuits and organized conduit runs."
+          fill
+          priority
+          sizes="100vw"
+          className="z-0 object-cover object-[68%_center] opacity-60"
+        />
+        <Schematic className="absolute inset-0 z-10 h-full w-full opacity-70" />
         {/*
           Readability scrim. The schematic runs the full bleed, so the reading
           column needs protection. Strong at the left where the copy sits,
@@ -28,10 +37,10 @@ export default function HomePage() {
         */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(180deg,#14161A_0%,rgba(20,22,26,0.94)_55%,rgba(20,22,26,0.88)_100%)] lg:bg-[linear-gradient(95deg,#14161A_0%,#14161A_26%,rgba(20,22,26,0.86)_48%,rgba(20,22,26,0.4)_72%,rgba(20,22,26,0.05)_100%)]"
+          className="absolute inset-0 z-10 bg-[linear-gradient(180deg,#14161A_0%,rgba(20,22,26,0.94)_55%,rgba(20,22,26,0.88)_100%)] lg:bg-[linear-gradient(95deg,#14161A_0%,rgba(20,22,26,0.96)_34%,rgba(20,22,26,0.76)_55%,rgba(20,22,26,0.22)_80%,rgba(20,22,26,0.08)_100%)]"
         />
 
-        <Container className="relative pb-16 pt-16 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-28">
+        <Container className="relative z-20 pb-16 pt-16 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-8">
               <Reveal motion="rise">
@@ -194,7 +203,7 @@ export default function HomePage() {
                       className="group flex items-start gap-5 border-b border-paper-line py-6 transition-colors duration-200 hover:bg-paper-pure sm:gap-7 sm:px-2"
                     >
                       <span className="mt-1 font-mono text-[0.72rem] tabular-nums text-slate-muted">
-                        {String(i + 1).padStart(2, "0")}
+                        {i + 1}
                       </span>
                       <ServiceIcon
                         name={service.icon}
@@ -252,6 +261,17 @@ export default function HomePage() {
                     Start a conversation
                   </Button>
                 </div>
+              </Reveal>
+              <Reveal motion="wipe" delay={160} className="mt-10">
+                <figure className="relative min-h-56 overflow-hidden border border-ink-line sm:min-h-64">
+                  <Image
+                    src="/images/electrical-wiring-detail.webp"
+                    alt="A row of electrical meters and conduit on an exterior wall."
+                    fill
+                    sizes="(min-width: 1024px) 42vw, 100vw"
+                    className="object-cover"
+                  />
+                </figure>
               </Reveal>
             </div>
 
